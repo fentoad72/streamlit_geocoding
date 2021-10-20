@@ -1,0 +1,4 @@
+﻿Name,Street_address,unit,City,State,ZIPcode,Country,email,entire_address
+PersonA,3180 E 6th Ave,Durango,CO,81301,"3180 E 6th Ave, Durango, CO, 81301"
+PersonB,81 Ball Ln,Durango,CO,81301,"81 Ball Ln, Durango, CO, 81301"
+PersonC,1364 Reese St,Silverton,CO,81433,"1364 Reese St, Silverton, CO, 81433"
