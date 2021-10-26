@@ -17,30 +17,21 @@ import folium
 from streamlit_folium import folium_static
 
 def draw_map(df):
-    from geopy.geocoders import Nominatim
+    #from geopy.geocoders import Nominatim
     geolocator = Nominatim(user_agent="mygeocoder")
 
-    from geopy.extra.rate_limiter import RateLimiter
-    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
+    #from geopy.extra.rate_limiter import RateLimiter
+    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=5)
     df['location'] = df['full_address'].apply(geocode)
-    df['point'] = df['location'].apply(lambda loc: tuple(loc.point) if loc else None)
-    df['lat'] = df['point'].apply(lambda t: t[0] if t else None)
-    df['long'] = df['point'].apply(lambda t: t[1] if t else None)
+    print("after location thinbg")
+    st.write("after geocode")
+    st.dataframe(df['location'])
+    bad_df = df[df.location.isnull()]
+    st.write("bad codes")
+    st.dataframe(bad_df)
 
-   
-    #print(df)
     
-    # center on Silverton
-    m = folium.Map(location=[37.6300, -107.8139], tiles='cartodb positron',zoom_start=9)
-    #st.write(df[0])
-    for index, row in df.iterrows():
-        loc = [row['lat'],row['long']]
-        # add marker for Liberty Bell
-        tooltip = row['full_address']
-        folium.Marker(
-             loc, popup=row['full_address'], tooltip=tooltip
-        ).add_to(m)
-    folium_static(m)
+
 
     return
     
